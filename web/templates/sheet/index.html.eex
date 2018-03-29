@@ -1,0 +1,22 @@
+<h5>Sheets</h5>
+
+<ul class="collection">
+	<%= for sheet <- @sheets do %>
+		<li class="collection-item">
+			<%= sheet.hash %>
+
+
+			<div class="right">
+				<%= link "Show", to: sheet_path(@conn, :show, sheet) %>
+			</div>
+
+		<%# <img src="<%= card_path(@conn, :image, card.id) %<" alt="<%= card.hash %<" /> %>
+		</li>
+	<% end %>
+</ul>
+
+<div class="fixed-action-btn">
+	<%= link to: sheet_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
+		<i class="material-icons">add</i>
+	<% end %>
+</div>

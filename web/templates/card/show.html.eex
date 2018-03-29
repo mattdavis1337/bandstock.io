@@ -1,0 +1,7 @@
+<img src="<%= card_path(@conn, :image, @card.id) %>" alt="<%= @card.hash %>" />
+
+<div class="row">
+	<div class="column">
+
+	</div>
+</div>		

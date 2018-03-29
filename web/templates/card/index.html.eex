@@ -1,0 +1,22 @@
+<h5>Cards</h5>
+
+<ul class="collection">
+	<%= for card <- @cards do %>
+		<li class="collection-item">
+			<div><%= card.hash %></div>
+			<div><img height="50" src="<%= card_path(@conn, :image, card.id) %>" alt="<%= card.hash %>" /></div>
+
+			<div class="right">
+				<%= link "Show", to: card_path(@conn, :show, card) %>
+			</div>
+
+		<%# <img src="<%= card_path(@conn, :image, card.id) %<" alt="<%= card.hash %<" /> %>
+		</li>
+	<% end %>
+</ul>
+
+<div class="fixed-action-btn">
+	<%= link to: card_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
+		<i class="material-icons">add</i>
+	<% end %>
+</div>

@@ -1,0 +1,6 @@
+<%= form_for @changeset, card_path(@conn, :create), fn f -> %>
+	<div class="form-group">
+		<%= text_input f, :hash, placeholder: "Hash", class: "form-control" %>
+
+		<%= submit "Create Card", class: "btn btn-primary" %>
+<% end %>
