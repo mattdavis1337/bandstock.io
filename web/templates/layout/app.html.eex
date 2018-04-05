@@ -14,12 +14,10 @@
 
   </head>
 
-  <body>
-    <nav class="light-blue">
+  <body  class="container black">
+    <nav class="amber accent-4">
       <div class="nav-wrapper container">
-        <a href="/" class="brand-logo">
-          Discussions
-        </a>
+        Welcome to Bandstock
         <ul class="right">
           <%= if @conn.assigns[:user] do %>
             <li>
@@ -32,7 +30,7 @@
       </div>
     </nav>
     
-    <div class="container">
+    <div class="container black">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
@@ -41,6 +39,8 @@
       </main>
 
     </div> <!-- /container -->
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+   
   </body>
 </html>

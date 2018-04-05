@@ -6,7 +6,9 @@ defmodule Bandstock.Card do
 		field :value, :integer
 		field :image_binary, :binary
       	field :image_binary_type, :string
-      	#belongs_to :sheet, Bandstock.Sheet
+      	belongs_to :sheet, Bandstock.Sheet
+
+      	#timestamps()
 	end
 
 

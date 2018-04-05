@@ -1,1 +1,5 @@
-<h2><%= @sheet.name %> is <%=@sheet.hash %></h2>
+<h2 class="cyan-text text-accent-4">Welcome to Bandstock</h2>
+
+<%= for card <- @sheet.cards do %>
+	<img height="50" src="<%= card_path(@conn, :image, card.id) %>" alt="<%= card.hash %>" />
+<% end %>

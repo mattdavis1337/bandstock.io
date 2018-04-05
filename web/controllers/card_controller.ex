@@ -4,6 +4,7 @@ defmodule Bandstock.CardController do
 
 	alias Bandstock.Card
 	alias Bandstock.ImageFetcher
+	alias Bandstock.Sheet
 
 
 	def show(conn, %{"id" => card_id}) do
@@ -22,12 +23,13 @@ defmodule Bandstock.CardController do
 	end
 
 	def create(conn, %{"card" => card}) do
-		IO.puts("+++card_controller card:")
-		IO.inspect(card)  #%{"hash" => "Flatland2"}
 		changeset = Card.changeset(%Card{}, card)
-		IO.puts("+++card_controller changeset")
-		IO.inspect(changeset) 
-		IO.puts("++++")
+		
+		sheet = Repo.get(Sheet, 1)
+
+		changeset = sheet #add association to sheet
+		|> build_assoc(:cards)
+		|> Card.changeset(card)
 
 		case Repo.insert(changeset) do
 			{:ok, new_card} -> 
@@ -48,8 +50,9 @@ defmodule Bandstock.CardController do
 
 	def image(conn, %{"id" => id}) do
 	  card = Repo.get!(Card, id)
+	  IO.inspect(card.image_binary)
 	  conn
-	  |> put_resp_content_type("image/png", "utf-8") #get content type from db - card.image_binary_type
+	  |> put_resp_content_type("image/png", "utf-8") #TODO: get content type from db - card.image_binary_type
 	  |> send_resp(200, card.image_binary)
 	end
 

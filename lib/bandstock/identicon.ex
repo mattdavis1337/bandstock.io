@@ -17,11 +17,21 @@ defmodule Bandstock.Identicon do
   end
 
   def draw_image(%Image{color: color, pixel_map: pixel_map}) do
-    image = :egd.create(250, 250)
+    height = 250;
+    width = 250;
+
+    square_count_vertical = 5;
+    square_count_horizontal = 5;
+
+    square_height = height/square_count_vertical;
+    square_width = width/square_count_horizontal;
+    
+
+    image = :egd.create(height, width)
     fill = :egd.color(color)
     black = :egd.color({0,0,0})
 
-    :egd.filledRectangle(image, {0,0}, {250,250}, black)
+    :egd.filledRectangle(image, {0,0}, {height,width}, black)
     Enum.each pixel_map, fn({start, stop}) ->
       :egd.filledRectangle(image, start, stop, fill)
       #:egd.rectangle(image, start, stop, black)
@@ -31,12 +41,22 @@ defmodule Bandstock.Identicon do
   end
 
   def build_pixel_map(%Image{grid: grid} = image) do
+    height = 250;
+    width = 250;
+
+    square_count_vertical = 5;
+    square_count_horizontal = 5;
+
+    square_height = height/square_count_vertical;
+    square_width = width/square_count_horizontal;
+    
+
     pixel_map = Enum.map grid, fn({_code, index}) ->
-      horizontal = rem(index, 5) * 50
-      vertical = div(index, 5) * 50
+      horizontal = rem(index, square_count_horizontal) * square_width
+      vertical = div(index, square_count_vertical) * square_height
 
       top_left = {horizontal, vertical}
-      bottom_right = {horizontal + 50, vertical + 50}
+      bottom_right = {horizontal + square_width, vertical + square_height}
       {top_left, bottom_right}
     end
 

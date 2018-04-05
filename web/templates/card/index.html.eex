@@ -4,7 +4,7 @@
 	<%= for card <- @cards do %>
 		<li class="collection-item">
 			<div><%= card.hash %></div>
-			<div><img height="50" src="<%= card_path(@conn, :image, card.id) %>" alt="<%= card.hash %>" /></div>
+			<div><img height="50" src="<%= card_path(@conn, :image, card.id) %>" alt="<%= card.hash %>"/></div>
 
 			<div class="right">
 				<%= link "Show", to: card_path(@conn, :show, card) %>

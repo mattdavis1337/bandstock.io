@@ -4,7 +4,9 @@ defmodule Bandstock.Sheet do
 	schema "sheets" do
 		field :hash, :string
 		field :name, :string
-		#has_many :cards, Bandstock.Card
+		has_many :cards, Bandstock.Card
+
+		#timestamps()
 	end
 
 	def changeset(struct, params \\ %{}) do

@@ -3,6 +3,7 @@ defmodule Bandstock.SheetController do
 	use Bandstock.Web, :controller
 
 	alias Bandstock.Sheet
+	alias Bandstock.Card
 
 #def show(conn, %{"id" => sheet_id}) do
 #		sheet = Repo.get(Sheet, sheet_id)
@@ -10,7 +11,10 @@ defmodule Bandstock.SheetController do
 #end
 
 	def main(conn, params) do
-		sheet = Repo.get(Sheet, 1)
+		sheet = Repo.get(Sheet, 1) |>  
+		Repo.preload(:cards)
+
+		IO.inspect(sheet)
 		render conn, "show.html", sheet: sheet
 	end
 
@@ -40,7 +44,13 @@ defmodule Bandstock.SheetController do
 	end
 
 	def show(conn, %{"id" => sheet_id}) do
-		sheet = Repo.get(Sheet, sheet_id)
+
+
+
+		sheet = Repo.get(Sheet, sheet_id) |> preload(:cards)
+
+
+
 		render conn, "show.html", sheet: sheet
 	end
 end
